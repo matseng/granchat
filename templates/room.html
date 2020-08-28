@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}GrannyChat: Room{% endblock %}
+{% block styles %}
+	<link rel="stylesheet" href="/static/css/room.css">
+{% endblock %}
+{% block content %}
+	<section class="hero">
+		<div class="hero-body">
+			<div class="container">
+				<h1 id="mode" class="title cool-serif desktop-header">
+				GrannyChat
+				</h1>
+				<h1 class="title cool-serif mobile-header">
+				GrannyChat
+				</h1>
+				<div class="cool-serif settings hidden">
+					Settings
+				</div>
+				<h2 class="subtitle serif desktop-header">
+				Enjoy your Golden Years... even without Golden Ears
+				</h2>
+				<div class="subtitle">
+					<div id="join">
+						<form action="#" method="post" class="normform">
+							<input type="submit" id="join-button" value="Join Chat">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="video-container hidden">
+	<video autoplay loop muted playsinline class="remote-video" controls="false" id="remote"></video>
+<video autoplay src="/static/video/grandchild.mp4" loop="true" controls="false" class="local-video flipped-video" id="local"></video>
+<audio class="hidden" autoplay="true" id="remote-audio"></audio>
+</div>
+<div class="overlay">
+<form action="#" method="post" class="normform" class="transcript-container hidden">
+<fieldset>
+	<legend>Transcript - Grandchild</legend>
+	<!-- <label for="select-choice-2">Dropdown Select Choice:</label> -->
+	<div id="transcript">
+		<div class="transcript-item"><span style="font-style: italic;">The Grandchild's words will appear here once they begin speaking!</span></div>
+	</div>
+	<!-- <div class="transcript-item">This is a very very very long list of stuff that should wrap around. This is a very very very long list of stuff that should wrap around. This is a very very very long list of stuff that should wrap around. This is a very very very long list of stuff that should wrap around. This is a very very very long list of stuff that should wrap around</div> -->
+	<!-- <input type="textarea" disabled value="This is a very very very long list of stuff that should wrap around" /> -->
+	
+</fieldset>
+</form>
+</div>
+<div class="modal">
+<div class="modal-background"></div>
+<div class="modal-content">
+<form action="#" method="post" class="normform">
+	<fieldset>
+		<legend>My Font Size</legend>
+		<input id="my-size" type="number" pattern="[0-9]*" inputmode="numeric" value="12" min="2" max="200"/>
+	</fieldset>
+	<fieldset id="grandparent-control" class="hidden">
+		<legend>Grandparent's Font Size</legend>
+		<input id="their-size" type="number" pattern="[0-9]*" inputmode="numeric" value="12" min="2" max="200"/>
+	</fieldset>
+	<input type="submit" id="save" value="Close">
+	
+</form>
+</div>
+<button class="modal-close is-large" aria-label="close"></button>
+<!-- <div id="transcript-container" class="hidden">
+	<div>
+			<label for="my-size">My Font Size</label>
+			<input id="my-size" type="range" min="10" max="100" value="20" class="slider" />
+	</div>
+	<div id="grandparent-control" class="hidden">
+			<label id="their-label" for="their-size" >Grandparent's Font Size</label>
+			<input id="their-size" type="range" min="10" max="100" value="20" class="slider" />
+	</div>
+	<ul id="transcript">
+			<li>Test</li>
+	</ul>
+</div> -->
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+	const token = "{{token}}";
+	const isServerGrandparent = "{{is_grandparent}}";
+</script>
+<script type="text/javascript" src="/static/js/split.js"></script>
+<script type="text/javascript" src="/static/js/Resampler.js"></script>
+<script type="text/javascript" src="/static/js/room.js"></script>
+{% endblock %}
