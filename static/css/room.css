@@ -1,128 +1,103 @@
-.flipped-video {
-	/*transform: scale(-1, 1);*/
-}
-
 .hero-body {
-	padding-top: 1.5rem;
+  padding-top: 1.5rem;
 }
-
-
 
 video {
-	background-color: black;
+  background-color: black;
 }
 
 .remote-video {
-	object-fit: contain;
-	object-position: center top;
-	width: 100%;
-	/*height: 90vh;*/
-	/*bottom: 0px;*/
-	/*position: absolute;*/
-	/*z-index: 1;*/
-	/*max-height: 75vh;*/
-	margin-top: -3rem;
+  object-fit: contain;
+  object-position: center top;
+  width: 100%;
+  margin-top: -3rem;
 }
 
 .local-video {
-	width: 25%;
-	position: absolute;
-	z-index: 3;
-	right: 0px;
-	top: 0px;
-	transform: scale(-1, 1);
-	margin-top: -3rem;
+  width: 25%;
+  position: absolute;
+  z-index: 3;
+  right: 0px;
+  top: 0px;
+  transform: scale(-1, 1);
+  margin-top: -3rem;
 }
 
-.video-container {
-	position: relative;
-	/*min-height: 75vh;*/
-
+#video-container {
+  position: relative;
 }
 
 .gutter {
-	background-color: red;
+  background-color: red;
 }
 
-.settings {
-	right: 0px;
-    top: 0px;
-    /* display: inline; */
-    position: absolute;
-    /*background-color: red;*/
-    z-index: 3;
-    float: right;
-
-    height: 2rem;
-
-    color: #363636;
-        font-size: 1rem;
-        margin-top: 0.6rem;
-        font-weight: 400;
-        line-height: 1.125;
-
-     text-decoration: underline;
+#settings {
+  right: 0px;
+  top: 0px;
+  position: absolute;
+  z-index: 3;
+  float: right;
+  height: 2rem;
+  color: #363636;
+  font-size: 1rem;
+  margin-top: 0.6rem;
+  font-weight: 400;
+  line-height: 1.125;
+  text-decoration: underline;
 }
 
-.overlay {
-	position: fixed;
-	bottom: 0px;
-	width: 100%;
-	background-color: rgb(250, 248, 245);
-	top: 1000000px;
-	overflow-y: auto;
+#overlay {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  background-color: rgb(250, 248, 245);
+  top: 1000000px;
+  overflow-y: auto;
 }
 
-.overlay fieldset {
-	/*height: 100vh;*/
-	border-bottom: none !important;
-	box-shadow: none !important;
+#overlay fieldset {
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
 
 #transcript {
-	font-size: 12pt;
+  font-size: 12pt;
 }
 
 .transcript-item {
-	border: 1px solid lightgrey;
-    border-left: 5px solid lightgrey;
-    border-radius: 5px;
-    outline: none;
-    padding: 10px 15px;
-    margin-bottom: 20px;
+  border: 1px solid lightgrey;
+  border-left: 5px solid lightgrey;
+  border-radius: 5px;
+  outline: none;
+  padding: 10px 15px;
+  margin-bottom: 20px;
 }
 
 .current {
-	border-color: var(--nf-success-border-color);
-    border-left: 5px solid var(--nf-success-border-color);
+  border-color: var(--nf-success-border-color);
+  border-left: 5px solid var(--nf-success-border-color);
 }
 
 .panel-heading {
-	background-color: var(--nf-main-color);
-	color: rgb(250, 248, 245);
+  background-color: var(--nf-main-color);
+  color: rgb(250, 248, 245);
 }
 
 *::-webkit-media-controls-panel {
-  display: none!important;
+  display: none !important;
   -webkit-appearance: none;
 }
-
-/* Old shadow dom for play button */
 
 *::-webkit-media-controls-play-button {
-  display: none!important;
+  display: none !important;
   -webkit-appearance: none;
 }
 
-/* New shadow dom for play button */
-
-/* This one works! */
-
 *::-webkit-media-controls-start-playback-button {
-  display: none!important;
+  display: none !important;
   -webkit-appearance: none;
 }
 
 video::-webkit-media-controls {
-    display:none !important;
+  display: none !important;
 }

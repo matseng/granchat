@@ -1,95 +1,64 @@
 {% extends "base.html" %}
 {% block title %}GrannyChat: Create{% endblock %}
 {% block content %}
-	<section class="hero">
-		<div class="hero-body">
-			<div class="container">
-				<h1 class="title cool-serif">
-				GrannyChat
-				<span class="icon">
-				  <i class="fas fa-home"></i>
-				</span>
-				</h1>
-				<h2 class="subtitle serif">
-				Enjoy your Golden Years... even without Golden Ears
-				</h2>
-				<div class="subtitle">
-					<div id="creation">
-						<form action="#" method="post" class="normform">
-							<fieldset>
-								<legend>I am a...</legend>
-								<!-- <label for="select-choice-2">Dropdown Select Choice:</label> -->
-								<div class="select-dropdown">
-									<select name="select-choice-2" id="select-choice">
-										<option value="grandchild">Grandchild</option>
-										<option value="grandparent">Grandparent</option>
-									</select>
-								</div>
-							</fieldset>
-							<fieldset>
-								<legend>looking to chat with family, but first I gotta...</legend>
-								<!-- <label for="select-choice-2">Dropdown Select Choice:</label> -->
-								<input type="checkbox" name="checkbox-1" id="checkbox-1" checked>
-								<label for="checkbox-1">Accept the Terms and Conditions</label>
-								<input type="checkbox" name="checkbox-0" id="checkbox-0" checked>
-								<label for="checkbox-0">Agree to cookies</label>
-								
-							</fieldset>
-							<input type="submit" id="create" value="Create a Chat">
-							
-						</form>
-					</div>
-					<div class="subtitle">
-						<div id="result" class="hidden">
-							<form action="#" method="post" class="normform">
-								<fieldset>
-									<legend id="leg"></legend>
-									<!-- <label for="select-choice-2">Dropdown Select Choice:</label> -->
-									<input type="text" id="room-link" value="" />
-								</fieldset>
-
-
-								<div class="inline-buttons desktop-header">
-								    <input type="submit" class="open-new-tab" value="Start Chatting in New Tab">
-								    <input type="reset" class="copy-to-clipboard" value="Copy Link to Clipboard">
-								</div>
-
-
-								<div class="inline-buttons mobile-header">
-								    <input type="submit" class="open-new-tab" value="Start Chatting">
-								    <input type="reset" class="copy-to-clipboard" value="Copy Link">
-								</div>
-								
-								<!-- <input type="submit" id="create" value="Create a Chat"> -->
-								
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	 <!-- <div class="create-form">
-						<form class="form-inline">
-									<div class="form-check mb-2 mr-sm-2">
-												<input class="form-check-input" type="checkbox" id="grandparent">
-												<label class="form-check-label" for="grandparent">
-															I'm a Grandparent
-												</label>
-									</div>
-									<button type="submit" id="create" class="btn btn-primary mb-2">Create Chat</button>
-						</form>
-		</div>
-		<div class="room-result hidden">
-						<div>
-										<a id="room-link" href="TODO" target="_blank">TODO</a>
-						</div>
-						<div class="btn-group" role="group" aria-label="Room buttons">
-									<button id="copy-to-clipboard" type="button" class="btn btn-secondary" data-toggle="popover" title="Copied" data-content="Link copied to clipboard. Enjoy!">Copy to Clipboard</button>
-									<button id="open-new-tab" type="button" class="btn btn-success">Open in New Tab</button>
-						</div> -->
-	</div>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title cool-serif">
+        GrannyChat
+        <span class="icon">
+          <i class="fas fa-home"></i>
+        </span>
+      </h1>
+      <h2 class="subtitle serif">
+        Enjoy your Golden Years... even without Golden Ears
+      </h2>
+      <div class="subtitle">
+        <div id="creation">
+          <form action="#" method="post" class="normform">
+            <fieldset>
+              <legend>I am a...</legend>
+              <div class="select-dropdown">
+                <select name="select-choice-2" id="select-choice">
+                  <option value="grandchild">Grandchild</option>
+                  <option value="grandparent">Grandparent</option>
+                </select>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>looking to chat with family, but first I gotta...</legend>
+              <input type="checkbox" name="checkbox-1" id="checkbox-1" checked>
+              <label for="checkbox-1">Accept the Terms and Conditions</label>
+              <input type="checkbox" name="checkbox-0" id="checkbox-0" checked>
+              <label for="checkbox-0">Agree to cookies</label>
+            </fieldset>
+            <input type="submit" id="create" value="Create a Chat">
+          </form>
+        </div>
+        <div class="subtitle">
+          <div id="result" class="hidden">
+            <form action="#" method="post" class="normform">
+              <fieldset>
+                <legend id="leg"></legend>
+                <input type="text" id="room-link" value="" />
+              </fieldset>
+              <div class="inline-buttons desktop-header">
+                <input type="submit" class="open-new-tab" value="Start Chatting in New Tab">
+                <input type="reset" class="copy-to-clipboard" value="Copy Link to Clipboard">
+              </div>
+              <div class="inline-buttons mobile-header">
+                <input type="submit" class="open-new-tab" value="Start Chatting">
+                <input type="reset" class="copy-to-clipboard" value="Copy Link">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
 {% endblock %}
 {% block scripts %}
-	<script type="text/javascript" src="/static/js/create.js"></script>
+<script type="text/javascript" src="/static/js/create.js"></script>
 {% endblock %}

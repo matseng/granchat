@@ -1,34 +1,3 @@
-#!/usr/bin/env python
-
-# Copyright 2019 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
-"""Google Cloud Speech API sample application using the streaming API.
-
-NOTE: This module requires the dependencies `pyaudio` and `termcolor`.
-To install using pip:
-
-    pip install pyaudio
-    pip install termcolor
-
-Example usage:
-    python transcribe_streaming_infinite.py
-"""
-
-# [START speech_transcribe_infinite_streaming]
-
-import re
 import sys
 import time
 from threading import Thread
@@ -37,11 +6,7 @@ from google.cloud import speech
 from six.moves import queue
 from queue import Queue
 
-# Audio recording parameters
 STREAMING_LIMIT = 240000  # 4 minutes
-# SAMPLE_RATE = 16000
-# CHUNK_SIZE = int(SAMPLE_RATE / 10)  # 100ms
-
 
 RED = '\033[0;31m'
 GREEN = '\033[0;32m'
@@ -79,16 +44,13 @@ class ResumableMicrophoneStream:
         self.result_queue = Queue()
         self.in_progress = bytes([])
 
-
     def start(self):
         self.closed = False
         t1 = Thread(target=self.looper)
         t1.daemon = True
         t1.start()
 
-
     def close(self):
-
         self.closed = True
         # Signal the generator to terminate so that the client's
         # streaming_recognize method will not block the process termination.
@@ -98,7 +60,7 @@ class ResumableMicrophoneStream:
         """Continuously collect data from the audio stream, into the buffer."""
 
         self._buff.put(in_data)
-        return None, None #pyaudio.paContinue
+        return None, None  # pyaudio.paContinue
 
     def generator(self):
         """Stream Audio from microphone to API and to local buffer"""
@@ -123,7 +85,7 @@ class ResumableMicrophoneStream:
 
                     self.bridging_offset = (round((
                         len(self.last_audio_input) - chunks_from_ms)
-                                                  * chunk_time))
+                        * chunk_time))
 
                     for i in range(chunks_from_ms, len(self.last_audio_input)):
                         data.append(self.last_audio_input[i])
@@ -167,7 +129,7 @@ class ResumableMicrophoneStream:
                 audio_content=content)for content in audio_generator)
 
             responses = self.client.streaming_recognize(self.streaming_config,
-                                                   requests)
+                                                        requests)
 
             # Now, put the transcription responses to use.
             listen_print_loop(responses, self)
@@ -236,15 +198,12 @@ def listen_print_loop(responses, stream):
         # line, so subsequent lines will overwrite them.
 
         if result.is_final:
-
             sys.stdout.write(GREEN)
             sys.stdout.write('\033[K')
             sys.stdout.write(str(corrected_time) + ': ' + transcript + '\n')
 
             stream.is_final_end_time = stream.result_end_time
             stream.last_transcript_was_final = True
-
-
         else:
             sys.stdout.write(RED)
             sys.stdout.write('\033[K')
@@ -257,65 +216,3 @@ def listen_print_loop(responses, stream):
             "text": transcript,
             "time": str(corrected_time)
         })
-
-
-
-def main():
-    """start bidirectional streaming from microphone input to speech API"""
-
-    client = speech.SpeechClient()
-    config = speech.types.RecognitionConfig(
-        encoding=speech.enums.RecognitionConfig.AudioEncoding.LINEAR16,
-        sample_rate_hertz=SAMPLE_RATE,
-        language_code='en-US',
-        enable_automatic_punctuation=True,
-        max_alternatives=1)
-    streaming_config = speech.types.StreamingRecognitionConfig(
-        config=config,
-        enable_automatic_punctuation=True,
-        interim_results=True)
-
-    mic_manager = ResumableMicrophoneStream(SAMPLE_RATE, CHUNK_SIZE)
-    print(mic_manager.chunk_size)
-    sys.stdout.write(YELLOW)
-    sys.stdout.write('\nListening, say "Quit" or "Exit" to stop.\n\n')
-    sys.stdout.write('End (ms)       Transcript Results/Status\n')
-    sys.stdout.write('=====================================================\n')
-
-    with mic_manager as stream:
-
-        while not stream.closed:
-            sys.stdout.write(YELLOW)
-            sys.stdout.write('\n' + str(
-                STREAMING_LIMIT * stream.restart_counter) + ': NEW REQUEST\n')
-
-            stream.audio_input = []
-            audio_generator = stream.generator()
-
-            requests = (speech.types.StreamingRecognizeRequest(
-                audio_content=content)for content in audio_generator)
-
-            responses = client.streaming_recognize(streaming_config,
-                                                   requests)
-
-            # Now, put the transcription responses to use.
-            listen_print_loop(responses, stream)
-
-            if stream.result_end_time > 0:
-                stream.final_request_end_time = stream.is_final_end_time
-            stream.result_end_time = 0
-            stream.last_audio_input = []
-            stream.last_audio_input = stream.audio_input
-            stream.audio_input = []
-            stream.restart_counter = stream.restart_counter + 1
-
-            if not stream.last_transcript_was_final:
-                sys.stdout.write('\n')
-            stream.new_stream = True
-
-
-if __name__ == '__main__':
-
-    main()
-
-# [END speech_transcribe_infinite_streaming]
